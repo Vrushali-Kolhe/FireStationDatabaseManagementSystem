@@ -1,0 +1,64 @@
+{% extends 'headOfficerTemplate/base_template.html' %}
+{% block page_title %}
+ADD ACTION
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Action</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/add_action_save" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    {% if messages %}
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                    </div>
+
+
+                    <div class="form-group">
+                    <label>Status</label>
+                    <input type="text" class="form-control" name="status" placeholder="Enter Status" maxlength="100">
+                  </div>
+                    <div class="form-group">
+                    <label>Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description" maxlength="2000">
+                  </div>
+
+                                  <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">ADD</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

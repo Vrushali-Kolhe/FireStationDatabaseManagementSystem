@@ -1,0 +1,42 @@
+{% extends 'headOfficerTemplate/base_template.html' %}
+{% block page_title %}
+MANAGE STATION
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+              <div class="card-header">
+                <h3 class="card-title">Station Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Contact</th>
+                      <th>Address</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for station in stations %}
+                    <tr>
+                      <td>{{ station.id }}</td>
+                      <td>{{ station.contact }}</td>
+                      <td>{{ station.address }}</td>
+                        <td><a href="/edit_station/{{ station.id }}" class="btn btn-success">Edit</a></td>
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

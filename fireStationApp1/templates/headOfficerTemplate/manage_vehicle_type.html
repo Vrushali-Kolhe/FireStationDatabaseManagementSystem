@@ -1,0 +1,45 @@
+{% extends 'headOfficerTemplate/base_template.html' %}
+{% block page_title %}
+MANAGE VEHICLE TYPE
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+              <div class="card-header">
+                <h3 class="card-title">Vehicle Type Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Water Capacity</th>
+                        <th>Action</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for vehicle_type in vehicle_types %}
+                    <tr>
+                      <td>{{ vehicle_type.id }}</td>
+                      <td>{{ vehicle_type.name }}</td>
+                      <td>{{ vehicle_type.mobile }}</td>
+                      <td>{{ vehicle_type.water_capacity }}</td>
+                        <td><a href="/edit_vehicle_type/{{ vehicle_type.id }}" class="btn btn-success">Edit</a></td>
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

@@ -1,0 +1,49 @@
+{% extends 'headOfficerTemplate/base_template.html' %}
+{% block page_title %}
+MANAGE VEHICLE
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+              <div class="card-header">
+                <h3 class="card-title">Vehicle Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Vehicle Number</th>
+                      <th>Purchase Date</th>
+                      <th>Status</th>
+                        <th>Vehicle Type</th>
+                         <th>Station Address</th>
+                        <th>Action</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for vehicle in vehicles %}
+                    <tr>
+                      <td>{{ vehicle.id }}</td>
+                      <td>{{ vehicle.vehicle_number }}</td>
+                      <td>{{ vehicle.purchase_date }}</td>
+                      <td>{{ vehicle.status }}</td>
+                        <td>{{ vehicle.vehicle_type_id.name }}</td>
+                        <td>{{ vehicle.station_id.address }}</td>
+                        <td><a href="/edit_vehicle/{{ vehicle.id }}" class="btn btn-success">Edit</a></td>
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

@@ -1,0 +1,85 @@
+{% extends 'headOfficerTemplate/base_template.html' %}
+{% block page_title %}
+EDIT VEHICLE | #ID : {{ vehicle.id }}
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Edit Vehicle</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/edit_vehicle_save" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    {% if messages %}
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="hidden" name="vehicle_id" value="{{ vehicle.id }}">
+                    <label>Vehicle Number</label>
+                    <input type="text" class="form-control" name="vehicle_number" value="{{ vehicle.vehicle_number }}">
+                  </div>
+                    <div class="form-group">
+                    <label>Purchase Date</label>
+                        <input type="date" class="form-control" name="purchase_date" value="{{ vehicle.purchase_date|date:"Y-m-d" }}">
+                  </div>
+                    <div class="form-group">
+                    <label>Status</label>
+                    <input type="text" class="form-control" name="status" value="{{ vehicle.status }}">
+                  </div>
+                </div>
+                  <div class="form-group">
+                    <label>Station</label>
+                        <select class="form-control" name="station_id" >
+                            {% for station in stations %}
+                            <option value="{{ station.id }}" {% if station.id == vehicle.station_id.id %} selected {% endif %}>{{ station.address }}</option>
+                            {% endfor %}
+                        </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Vehicle Type</label>
+                        <select class="form-control" name="vehicle_type_id">
+                            {% for vehicle_type in vehicle_types %}
+                            <option value="{{ vehicle_type.id }}" {% if vehicle_type.id == vehicle.vehicle_type_id.id %} selected {% endif %}>{{ vehicle_type.name }}</option>
+                            {% endfor %}
+                        </select>
+                  </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">SAVE</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
